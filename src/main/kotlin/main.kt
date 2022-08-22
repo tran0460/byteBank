@@ -5,7 +5,7 @@ fun main() {
     val contaHygor = Conta()
     contaHygor.titular = "Hygor"
     contaHygor.numero = 1000
-    contaHygor.saldo = 200.0
+    contaHygor.saldo = 100.0
 
 
     val contaFran = Conta()
@@ -22,15 +22,69 @@ fun main() {
     println(contaFran.titular)
     println(contaFran.numero)
     println(contaFran.saldo)
+    println()
+
+    println("depositando na conta do Hygor")
+    contaHygor.deposita(valor = 50.0)
+    println(contaHygor.saldo)
+    println()
+
+    println("sacando da conta do Hygor")
+    contaHygor.saca(130.0)
+    println(contaHygor.saldo)
+
+
+    println("------>>> depositando na conta da Fran")
+    contaFran.deposita(valor = 70.0)
+    println("Saldo ${contaFran.saldo}")
+    println()
+
+    println("----->>> sacando da conta do Fran")
+    contaFran.saca(130.0)
+    println("Saldo ${contaFran.saldo}")
 
 
 
 }
 
+
 class Conta {
     var titular = ""
     var numero = 0
     var saldo = 0.0
+
+    fun deposita(valor: Double) {
+        this.saldo += valor
+    }
+
+    fun saca(valor: Double){
+        if(saldo >= valor){
+            saldo -= valor
+            println("Valor sacado $valor")
+        } else {
+            println("Saldo insuficiente")
+        }
+    }
+}
+
+fun testaCopiasEReferencias() {
+
+    val numeroX = 10
+    var numeroY = numeroX
+    numeroY++
+
+    println("numero X $numeroX")
+    println("numero Y $numeroY")
+
+    val contaJoao = Conta()
+    contaJoao.titular = "Joao"
+
+    var contaMaria = Conta()
+    contaMaria.titular = "Maria"
+
+
+    println("titular conta joao   -> ${contaJoao.titular}")
+    println("titular conta maria -> ${contaMaria.titular}")
 }
 
 fun testaLacos() {
