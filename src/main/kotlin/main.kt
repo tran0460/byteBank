@@ -57,6 +57,8 @@ fun main() {
     println("Conta Hygor ${contaHygor.saldo}")
     println("Conta Fran ${contaFran.saldo}")
 
+    println(testaCondicoes(contaHygor.saldo))
+
 }
 // Constructor Primary
 class Conta(
