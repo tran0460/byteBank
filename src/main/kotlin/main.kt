@@ -1,16 +1,13 @@
 fun main() {
     println("Bem vindo ao Bytebank")
 
-    val contaHygor = Conta()
-    contaHygor.titular = "Hygor"
-    contaHygor.numero = 1000
+    val contaHygor = Conta("Hygor", 1000)
     contaHygor.deposita(1500.0)
 
-    val contaFran = Conta()
-    contaFran.titular = "Fran"
-    contaFran.numero = 1002
+    val contaFran = Conta("Fran", 1001)
     contaFran.deposita(2500.0)
     println()
+
 
     println("-----------------------------------------------")
     println("Titular da Conta --> ${contaHygor.titular}")
@@ -68,9 +65,16 @@ class Conta {
     var saldo = 0.0
         private set
 
+    constructor(titular: String, numero: Int) {
+        this.titular = titular
+        this.numero = numero
+    }
+
     fun deposita(valor: Double) {
         if (valor > 0) {
             this.saldo += valor
+        } else {
+            println("O valor precisa ser maior que 0.0")
         }
     }
 
@@ -113,12 +117,9 @@ fun testaCopiasEReferencias() {
     println("numero X $numeroX")
     println("numero Y $numeroY")
 
-    val contaJoao = Conta()
-    contaJoao.titular = "Joao"
+    val contaJoao = Conta("Joao", 1002)
 
-    var contaMaria = Conta()
-    contaMaria.titular = "Maria"
-
+    var contaMaria = Conta("Maria", 1003)
 
     println("titular conta joao   -> ${contaJoao.titular}")
     println("titular conta maria -> ${contaMaria.titular}")
