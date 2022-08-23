@@ -20,7 +20,11 @@ public fun testeFuncionarios() {
         plr = 1500.0
     )
 
-
+    val maria = Analista(
+        nome = "Maria",
+        cpf = "556.326.326-52",
+        salario = 3000.0,
+    )
 
     println("Nome--> ${alex.nome}")
     println("CPF--> ${alex.cpf}")
@@ -41,4 +45,17 @@ public fun testeFuncionarios() {
     println("Bonificacao Gui--> ${gui.bonificacao}")
     println("Plr ${gui.plr}")
     gui.autenticacao(senha = 1235)
+    println()
+
+    val calculadora = calculadoraBonificacao()
+    calculadora.registra(alex)
+    calculadora.registra(fran)
+    calculadora.registra(gui)
+    calculadora.registra(maria)
+
+
+
+
+    println("Total de bonificacao: ${calculadora.total}")
+
 }
