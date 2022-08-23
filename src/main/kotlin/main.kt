@@ -1,20 +1,18 @@
 fun main() {
     println("Bem vindo ao Bytebank")
 
-
     val contaHygor = Conta()
     contaHygor.titular = "Hygor"
     contaHygor.numero = 1000
-    contaHygor.saldo = 100.0
+    contaHygor.saldo = 1000.0
 
 
     val contaFran = Conta()
     contaFran.titular = "Fran"
     contaFran.numero = 1002
-    contaFran.saldo = 300.0
+    contaFran.saldo = 2000.0
 
-
-    println(contaHygor.titular)
+    println("Titular da Conta ${contaHygor.titular}")
     println(contaHygor.numero)
     println(contaHygor.saldo)
     println()
@@ -24,29 +22,41 @@ fun main() {
     println(contaFran.saldo)
     println()
 
+//    DEPOSITOS
     println("depositando na conta do Hygor")
-    contaHygor.deposita(valor = 50.0)
+    contaHygor.deposita(valor = 100.0)
     println(contaHygor.saldo)
     println()
-
-    println("sacando da conta do Hygor")
-    contaHygor.saca(130.0)
-    println(contaHygor.saldo)
-
 
     println("------>>> depositando na conta da Fran")
-    contaFran.deposita(valor = 70.0)
+    contaFran.deposita(valor = 200.0)
     println("Saldo ${contaFran.saldo}")
     println()
 
+
+//    SACANDO
+    println("sacando da conta do Hygor")
+    contaHygor.saca(100.0)
+    println(contaHygor.saldo)
+
     println("----->>> sacando da conta do Fran")
-    contaFran.saca(130.0)
+    contaFran.saca(200.0)
     println("Saldo ${contaFran.saldo}")
 
+//    TRANSFERENCIA
+    println("Transferencia da conta da Fran para Hygor")
 
+    if (contaFran.transfere(1000.0, contaHygor)) {
+        println("Transferencia sucedida")
+    } else {
+        println("Falaha na transferencia")
+    }
+
+    println()
+    println("Conta Hygor ${contaHygor.saldo}")
+    println("Conta Fran ${contaFran.saldo}")
 
 }
-
 
 class Conta {
     var titular = ""
@@ -57,13 +67,22 @@ class Conta {
         this.saldo += valor
     }
 
-    fun saca(valor: Double){
-        if(saldo >= valor){
+    fun saca(valor: Double) {
+        if (saldo >= valor) {
             saldo -= valor
             println("Valor sacado $valor")
         } else {
             println("Saldo insuficiente")
         }
+    }
+
+    fun transfere(valor: Double, destino: Conta): Boolean {
+        if (saldo >= valor) {
+            saldo -= valor
+            destino.saldo += valor
+            return true
+        }
+        return false
     }
 }
 
