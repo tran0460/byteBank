@@ -4,44 +4,50 @@ fun main() {
     val contaHygor = Conta()
     contaHygor.titular = "Hygor"
     contaHygor.numero = 1000
-    contaHygor.saldo = 1000.0
+    contaHygor.setSaldo(1500.0)
 
 
     val contaFran = Conta()
     contaFran.titular = "Fran"
     contaFran.numero = 1002
-    contaFran.saldo = 2000.0
-
-    println("Titular da Conta ${contaHygor.titular}")
-    println(contaHygor.numero)
-    println(contaHygor.saldo)
+    contaFran.setSaldo(2500.0)
     println()
 
-    println(contaFran.titular)
-    println(contaFran.numero)
-    println(contaFran.saldo)
+    println("-----------------------------------------------")
+    println("Titular da Conta --> ${contaHygor.titular}")
+    println("Numero da Conta --> ${contaHygor.numero}")
+    println("Saldo da conta Hygor --> ${contaHygor.getSaldo()}")
+    println("-----------------------------------------------")
+
+
+    println("Titular da Conta --> ${contaFran.titular}")
+    println("Numero da Conta --> ${contaFran.numero}")
+    println("Saldo da conta Fran --> ${contaFran.getSaldo()}")
+    println("-----------------------------------------------")
     println()
+
+
 
 //    DEPOSITOS
     println("depositando na conta do Hygor")
     contaHygor.deposita(valor = 100.0)
-    println(contaHygor.saldo)
+    println(contaHygor.getSaldo())
     println()
 
     println("------>>> depositando na conta da Fran")
     contaFran.deposita(valor = 200.0)
-    println("Saldo ${contaFran.saldo}")
+    println("Saldo ${contaFran.getSaldo()}")
     println()
 
 
 //    SACANDO
     println("sacando da conta do Hygor")
     contaHygor.saca(100.0)
-    println(contaHygor.saldo)
+    println(contaHygor.getSaldo())
 
     println("----->>> sacando da conta do Fran")
     contaFran.saca(200.0)
-    println("Saldo ${contaFran.saldo}")
+    println("Saldo ${contaFran.getSaldo()}")
 
 //    TRANSFERENCIA
     println("Transferencia da conta da Fran para Hygor")
@@ -53,15 +59,15 @@ fun main() {
     }
 
     println()
-    println("Conta Hygor ${contaHygor.saldo}")
-    println("Conta Fran ${contaFran.saldo}")
+    println("Conta Hygor ${contaHygor.getSaldo()}")
+    println("Conta Fran ${contaFran.getSaldo()}")
 
 }
 
 class Conta {
     var titular = ""
     var numero = 0
-    var saldo = 0.0
+    private var saldo = 0.0
 
     fun deposita(valor: Double) {
         this.saldo += valor
@@ -79,10 +85,23 @@ class Conta {
     fun transfere(valor: Double, destino: Conta): Boolean {
         if (saldo >= valor) {
             saldo -= valor
-            destino.saldo += valor
+            destino.deposita(valor)
             return true
         }
         return false
+    }
+
+    fun getSaldo(): Double {
+        return saldo
+    }
+
+    fun setSaldo(valor: Double) {
+        if (valor > 0) {
+            saldo = valor
+        } else {
+            println("DEU CERTO A FUN SET-SALDO")
+        }
+
     }
 }
 
